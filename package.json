@@ -1,0 +1,53 @@
+{
+  "name": "supplysetu-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@fontsource/inter": "^5.2.6",
+    "@fontsource/montserrat": "^5.2.6",
+    "@fontsource/pacifico": "^5.2.6",
+    "@mui/icons-material": "^7.2.0",
+    "@mui/material": "^7.2.0",
+    "@react-three/drei": "^10.6.1",
+    "@react-three/fiber": "^9.2.0",
+    "axios": "^1.11.0",
+    "cra-template-pwa": "2.0.0",
+    "framer-motion": "^12.23.9",
+    "i18next": "^22.5.1",
+    "nvm": "^0.0.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-i18next": "^12.3.1",
+    "react-router-dom": "^7.7.1",
+    "react-scripts": "^5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.8.0"
+  }
+}
