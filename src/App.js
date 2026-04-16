@@ -138,57 +138,67 @@ function App() {
           ...(mode === 'light'
             ? {
                 background: {
-                  default: '#f5fff7',
+                  default: '#f8fafc', // Softer white-gray
                   paper: '#ffffff',
                 },
-                primary: { main: '#15803d' },
-                secondary: { main: '#22c55e' },
-                text: { primary: '#0f172a', secondary: '#4d7c57' },
+                primary: { main: '#10b981', light: '#34d399', dark: '#047857' }, // Emerald
+                secondary: { main: '#3b82f6', light: '#60a5fa', dark: '#1d4ed8' }, // Blue
+                text: { primary: '#0f172a', secondary: '#64748b' },
+                divider: 'rgba(15, 23, 42, 0.08)',
               }
             : {
                 background: {
-                  default: '#041109',
-                  paper: '#0b1a12',
+                  default: '#020617', // Slate 950
+                  paper: '#0f172a', // Slate 900
                 },
-                primary: { main: '#22c55e' },
-                secondary: { main: '#34d399' },
-                text: { primary: '#f1fff0', secondary: '#a7f3d0' },
-                divider: 'rgba(34, 197, 94, 0.2)',
+                primary: { main: '#10b981', light: '#34d399', dark: '#047857' },
+                secondary: { main: '#3b82f6', light: '#60a5fa', dark: '#1d4ed8' },
+                text: { primary: '#f8fafc', secondary: '#94a3b8' },
+                divider: 'rgba(248, 250, 252, 0.08)',
               }),
         },
         typography: {
-          fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+          fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
           h1: {
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 700,
+            fontFamily: '"Montserrat", sans-serif',
+            fontWeight: 800,
+            letterSpacing: '-0.02em',
           },
           h2: {
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 600,
+            fontFamily: '"Montserrat", sans-serif',
+            fontWeight: 700,
+            letterSpacing: '-0.01em',
           },
           h3: {
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 600,
+            fontFamily: '"Montserrat", sans-serif',
+            fontWeight: 700,
           },
           h4: {
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: '"Montserrat", sans-serif',
             fontWeight: 600,
           },
           h5: {
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 500,
+            fontFamily: '"Inter", sans-serif',
+            fontWeight: 600,
           },
           h6: {
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: '"Inter", sans-serif',
             fontWeight: 500,
           },
+          button: {
+            fontFamily: '"Inter", sans-serif',
+            fontWeight: 600,
+            textTransform: 'none',
+          },
           body1: {
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: '"Inter", sans-serif',
             fontWeight: 400,
+            lineHeight: 1.6,
           },
           body2: {
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: '"Inter", sans-serif',
             fontWeight: 400,
+            lineHeight: 1.5,
           },
         },
         components: {
@@ -238,14 +248,17 @@ function App() {
     navigate('/login', { replace: true });
   };
 
-  if (!isAuthenticated) {
-    return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Login onAuth={handleAuthSuccess} />
-      </ThemeProvider>
-    );
-  }
+  // Instead of early return which hides the nav bar and landing page,
+  // we conditionally render the Login page at its specific route,
+  // and protect the private routes.
+  // if (!isAuthenticated) {
+  //   return (
+  //     <ThemeProvider theme={theme}>
+  //       <CssBaseline />
+  //       <Login onAuth={handleAuthSuccess} />
+  //     </ThemeProvider>
+  //   );
+  // }
 
   return (
     <ThemeProvider theme={theme}>
@@ -358,11 +371,11 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/about" element={<About />} />
             <Route path="/suppliers" element={<SupplierList />} />
-            <Route path="/my-account" element={<MyAccount />} />
-            <Route path="/vendors" element={<Vendors />} />
-            <Route path="/reviews" element={<SupplierReviews />} />
-            <Route path="/my-orders" element={<MyOrders />} />
-            <Route path="/login" element={<Navigate to="/suppliers" replace />} />
+            <Route path="/my-account" element={isAuthenticated ? <MyAccount /> : <Navigate to="/login" replace />} />
+            <Route path="/vendors" element={isAuthenticated ? <Vendors /> : <Navigate to="/login" replace />} />
+            <Route path="/reviews" element={isAuthenticated ? <SupplierReviews /> : <Navigate to="/login" replace />} />
+            <Route path="/my-orders" element={isAuthenticated ? <MyOrders /> : <Navigate to="/login" replace />} />
+            <Route path="/login" element={isAuthenticated ? <Navigate to="/suppliers" replace /> : <Login onAuth={handleAuthSuccess} />} />
             <Route path="/supplier/:id" element={<SupplierProfile />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
