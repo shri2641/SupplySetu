@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, Box, Select, MenuItem, BottomNavigation, BottomNavigationAction, Paper, Card, CardContent, CardActions, Avatar as MuiAvatar, List, ListItem, ListItemAvatar, ListItemText, Divider, ThemeProvider, createTheme, useTheme, IconButton, CssBaseline, Badge } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, Select, MenuItem, BottomNavigation, BottomNavigationAction, Paper, ThemeProvider, createTheme, useTheme, IconButton, CssBaseline, Badge } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import i18n from './i18n';
 import Landing from './components/Landing';

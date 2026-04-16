@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Typography, Divider, Paper, List, ListItem, ListItemIcon, ListItemText, useTheme } from '@mui/material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import GroupIcon from '@mui/icons-material/Group';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';

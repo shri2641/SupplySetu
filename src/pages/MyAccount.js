@@ -1,6 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { Box, Typography, Button, List, ListItem, Avatar, Paper, Chip, useTheme, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Stack, IconButton, CardMedia } from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
+import { Box, Typography, Button, List, ListItem, Avatar, Paper, Chip, useTheme, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Stack, IconButton } from '@mui/material';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import BadgeIcon from '@mui/icons-material/Badge';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
@@ -89,7 +88,7 @@ export default function MyAccount() {
     if (currentAvatar && !avatarPreview) {
       setAvatarPreview(currentAvatar);
     }
-  }, [profile, storedUser]);
+  }, [profile, storedUser, avatarPreview]);
 
   // Sync role from authenticated user whenever it changes
   useEffect(() => {
@@ -97,7 +96,7 @@ export default function MyAccount() {
       setProfile(prev => ({ ...prev, role: storedUser.role }));
       setForm(prev => ({ ...prev, role: storedUser.role }));
     }
-  }, [storedUser?.role]);
+  }, [storedUser?.role, profile?.role]);
 
   const handleSave = () => {
     // Merge form data but preserve role from authenticated user

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid, Card, CardContent, Avatar, Button, Chip, Paper, useTheme, TextField, InputAdornment, Stack, FormControlLabel, Checkbox, useMediaQuery, Dialog, DialogTitle, DialogContent, DialogActions, List, ListItem, ListItemText, Divider } from '@mui/material';
+import { Box, Typography, Grid, Card, CardContent, Avatar, Button, Chip, Paper, useTheme, TextField, InputAdornment, Stack, FormControlLabel, Checkbox, Dialog, DialogTitle, DialogContent, DialogActions, List, ListItem, ListItemText, Divider } from '@mui/material';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PinDropIcon from '@mui/icons-material/PinDrop';
@@ -18,7 +18,6 @@ export default function Vendors() {
   const [search, setSearch] = useState({ location: '', pincode: '' });
   const theme = useTheme();
   const isLight = theme.palette.mode === 'light';
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { t } = useTranslation();
   const navigate = useNavigate();
   const storedUser = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
@@ -64,29 +63,26 @@ export default function Vendors() {
   const [inventoryOpen, setInventoryOpen] = useState(false);
 
   useEffect(() => {
-    fetchVendors();
-  }, []);
-
-  const fetchVendors = async () => {
-    setLoading(true);
-    try {
-      const res = await api.get('/api/vendors');
-      let data = res.data;
-      if (isSupplier && (!data || data.length === 0)) {
-        data = demoVendors;
-      }
-      setVendors(data);
-      setError('');
-    } catch (err) {
-      if (isSupplier) {
+    const fetchVendors = async () => {
+      setLoading(true);
+      try {
+        const res = await api.get('/api/vendors');
+        let data = res.data;
+        if (!data || data.length === 0) {
+          data = demoVendors;
+        }
+        setVendors(data);
+        setError('');
+      } catch (err) {
         setVendors(demoVendors);
         setError('');
-      } else {
-        setError('Failed to fetch vendors');
       }
-    }
-    setLoading(false);
-  };
+      setLoading(false);
+    };
+
+    fetchVendors();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSupplier]);
 
   const handleChange = e => {
     const { name, value, type, checked } = e.target;
